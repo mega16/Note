@@ -1,0 +1,92 @@
+函数设计：
+耦合性：对于输入使用参数并且对于输出使用return语句
+耦合性：只有在真正必要的情况下使用全局变量
+耦合性：不要改变可变类型的参数，除非调用者希望这样做
+聚合性：每一个函数都应该有一个单一的，统一的目标
+大小：每一个函数应该相对较小
+耦合：避免直接改变在另一个模块文件中的变量
+
+递归函数：直接或间接地调用自身以进行循环的函数。
+用递归求和：
+def mysum(L):
+	if not L:
+		return 0
+	else:
+		return L[0] + mysum(L[1:])
+mysum([1,2,3,4,5])
+
+循环语句 VS 递归
+循环语句通常更为自然，递归在内存空间和执行时间方面效率较低
+
+递归处理任意结构：
+def sumtree(L):
+	tot = 0
+	for x in L:
+		if not isinstance(x,list):
+			tot += x
+		else：
+			tot += sumtree(x)
+	return tot
+L = [1,[2,[3,4],5],6,[7,8]]
+print sumtree(L)
+
+
+函数对象：属性和注解
+间接函数调用
+由于python 函数是对象。函数对象可以赋值给其他的名字，传递给其他函数，嵌入到数据结构，从一个函数返回另一个函数
+def echo(message):
+	print message
+
+def indirect(func,arg):
+	func(arg)
+
+indirect(echo, 'hello')
+
+schedule = [(echo,'spam),(echo,'han')]
+for (func, arg) in schedule:
+	func(arg)
+
+
+
+函数也可以创建并返回以便之后使用：
+def make(label):
+	def echo(message):
+		print label + ":" + message
+	return echo
+
+F = make('spam')
+F('Ham')
+F(egss)
+
+函数内省
+
+def func(a):
+	b = 'spam'
+	return b * a
+
+func(8)
+
+>> func.__name__
+>> dir(func)
+>>func.__code__
+>>dir(func.__code__)
+>>func.__code__.co_varnames
+>>func.__code__.co_argcount
+
+匿名函数：它返回了一个函数而不是将这个函数赋值给一个变量名。也就是没有函数名
+lambda是一个表达式，而不是一个语句。def语句总是得在头部将一个新的函数赋值给一个变量名，而不是将
+这个函数作为结果返回。
+lambda的主体是一个单个的表达式，而不是一个代码块。
+
+为什么使用lambda
+lambda通常用来编写跳转表（jump table）
+L = [lambda x:x **2,lambda x: x**3, lambda x : x**4]
+
+for f in L:
+	print f(2)
+print L[0](3)
+
+map, filter, reduce
+
+
+
